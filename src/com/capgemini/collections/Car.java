@@ -2,7 +2,7 @@ package com.capgemini.collections;
 
 import java.util.Objects;
 
-public class Car {
+public class Car implements Comparable<Car> {
 
 	private String make;
 	private String model;
@@ -53,10 +53,10 @@ public class Car {
 		this.price = price;
 	}
 
-	@Override
-	public String toString() {
-		return "Car [make=" + make + ", model=" + model + ", year=" + year + ", price=" + price + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Car [make=" + make + ", model=" + model + ", year=" + year + ", price=" + price + "]";
+//	}
 	public int hashCode() {
 		return Objects.hash(make,model);
 	}
@@ -73,5 +73,18 @@ public class Car {
 		Car car = (Car) obj;
 		return this.model==car.model && this.make==car.make;
 	}
+
+	@Override
+	public int compareTo(Car car) {
+		int result = Double.compare(this.price, car.price);
+		if(result == 0)
+			return this.model.compareTo(car.model);
+		return result;
+	}
+	@Override
+	public String toString() {
+		return model;
+	}
+	
 }
 
